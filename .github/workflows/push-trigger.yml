@@ -1,25 +1,25 @@
-name: Deploy to Vercel on Push
+name: Notify Slack on Push
 
 on:
-  # Will trigger the workflow whenever a commit is pushed to
-  # the master branch
   push:
-    branches: [master]
+    branches:
+      - '*'
 
 jobs:
-  deploy_to_vercel:
-    permissions: write-all
+  slack-notification:
     runs-on: ubuntu-latest
-    # Skips the job if the string "[skip ci]" is present in the 
-    # commit message
-    if: ${{ !contains(github.event.head_commit, '[skip ci]') }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Deploy to Vercel
-        uses: BetaHuhn/deploy-to-vercel-action@v1.9.12
+      - name: Get commit message
+        id: commit
+        run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
+
+      - name: Send Slack Message
+        uses: archive/github-actions-slack@v2.7.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_ACCESS_TOKEN }}
+          slack-channel: ${{ secrets.SLACK_CHANNEL }}
+          slack-text: |
+            Changes pushed to the repository by ${{ github.actor }}:
+            ```
+            ${{ steps.commit.outputs.message }}
+            ```
