@@ -21,7 +21,7 @@ jobs:
       - name: Create new Jira ticket
         uses: atlassian/gajira-create@v3
         with:
-          project: TEST
+          project: KAN
           issuetype: Task
           summary: Update package documentation for ${{ github.event.registry_package.name }} ${{ github.event.registry_package.package_version }}
           description: A new version, ${{ github.event.registry_package.package_version }} was released and the documentation needs to be updated for the new package.
