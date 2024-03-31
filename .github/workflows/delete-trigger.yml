@@ -14,6 +14,6 @@ jobs:
         uses: archive/github-actions-slack@v2.7.0
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_ACCESS_TOKEN }}
-          slack-channel: ${{ secrets.SLACK_CHANNEL }}
+          slack-channel: ${{ vars.SLACK_CHANNEL }}
           slack-text: |
             The ${{ github.event.ref }} branch was deleted by ${{ github.actor }}
