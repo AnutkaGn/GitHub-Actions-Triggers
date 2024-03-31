@@ -22,7 +22,7 @@ jobs:
         id: get_jira_ticket_id
         uses: atlassian/gajira-find-issue-key@v3
         with:
-          string: ${{ github.event.issue.title }}
+          string: ${{ github.event.issue.body }}
       # Create the new Jira comment
       - name: Create Jira comment
         uses: atlassian/gajira-comment@v3
