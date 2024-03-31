@@ -13,6 +13,8 @@ jobs:
         with:
           server_address: ${{ secrets.SERVER_ADDRESS }}
           server_port: ${{ secrets.SERVER_PORT }}
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
           subject: New Tag Created
           to: ${{ vars.EMAIL_RECIPIENTS }}
           from: ${{ vars.EMAIL_SENDER }}
