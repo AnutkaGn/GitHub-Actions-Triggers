@@ -22,7 +22,7 @@ jobs:
         id: create_jira_ticket
         uses: atlassian/gajira-create@v3
         with:
-          project: My Kanban Project
+          project: KAN
           issuetype: Bug
           summary: ${{ github.event.issue.title }}
           description: ${{ github.event.issue.body }}
