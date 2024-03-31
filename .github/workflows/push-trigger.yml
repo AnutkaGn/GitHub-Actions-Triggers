@@ -9,9 +9,12 @@ jobs:
   slack-notification:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Get commit message
         id: commit
-        run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
+        run: echo "::set-output name=message::$(git log -1 --pretty=format:'%s')"
 
       - name: Send Slack Message
         uses: archive/github-actions-slack@v2.7.0
