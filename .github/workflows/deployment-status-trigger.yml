@@ -12,7 +12,7 @@ jobs:
       - name: Send Slack Message
         uses: archive/github-actions-slack@v2.7.0
         with:
-          slack-bot-user-oauth-access-token: $
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_ACCESS_TOKEN }}
           slack-channel: ${{ vars.SLACK_CHANNEL }}
           slack-text: |
             The deployment in the ${{ github.repository }} repository on \
