@@ -26,21 +26,4 @@ jobs:
           issuetype: Task
           summary: ${{ github.event.issue.title }}
           description: ${{ github.event.issue.body }}
-      # Add the Jira ticket ID in the issue
-      - name: Update issue body
-        uses: actions/github-script@v6.4.1
-        env:
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
-          issue_number: ${{ github.event.issue.number }}
-          body: ${{ github.event.issue.body }}
-          jira_ticket_id: ${{ steps.create_jira_ticket.outputs.issue }}
-        with:
-          script: |
-            github.rest.issues.update({
-              owner: process.env.owner,
-              repo: process.env.repo,
-              issue_number: process.env.issue_number,
-              body: process.env.body + "\n\n---\n\n**Jira Ticket ID:** " + \
-              process.env.jira_ticket_id
-            })
+      
