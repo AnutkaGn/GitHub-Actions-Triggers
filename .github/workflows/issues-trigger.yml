@@ -23,7 +23,7 @@ jobs:
         uses: atlassian/gajira-create@v3
         with:
           project: KAN
-          issuetype: Bug
+          issuetype: Task
           summary: ${{ github.event.issue.title }}
           description: ${{ github.event.issue.body }}
       # Add the Jira ticket ID in the issue
